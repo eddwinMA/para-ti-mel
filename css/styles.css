@@ -1,0 +1,169 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffb6c1, #ff69b4); /* Fondo original */
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #fff;
+    margin: 0;
+    transition: background-color 1s ease;
+}
+
+h1 {
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+
+button {
+    padding: 20px 40px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#yesBtn {
+    background-color: #32cd32;
+    color: white;
+    font-weight: bold;
+}
+
+#noBtn {
+    background-color: #ff4444;
+    color: white;
+    font-weight: bold;
+}
+
+#message {
+    margin-top: 30px;
+    font-size: 1.2rem;
+    font-style: italic;
+    min-height: 30px;
+}
+
+/* --- Nuevos estilos para el área de máquina de escribir --- */
+.typing-area-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Fondo oscuro casi negro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001; /* Más alto que el pergamino para que aparezca primero */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.typing-area-container.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.typed-text {
+    background-color: #222; /* Fondo del "terminal" */
+    color: #0f0; /* Color del texto verde de terminal */
+    font-family: 'Courier New', monospace; /* Fuente de máquina de escribir */
+    font-size: 1.2em;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    white-space: pre-wrap; /* Para respetar saltos de línea */
+    border-right: .15em solid #0f0; /* Cursor parpadeante */
+    animation: blink-caret .75s step-end infinite;
+}
+
+/* Animación del cursor de máquina de escribir */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #0f0; } /* Cursor verde */
+}
+
+/* --- Estilos para el contenedor del pergamino (estado final) --- */
+.pergamino-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente oscuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Estará debajo del typingArea inicialmente */
+    opacity: 0; /* Inicialmente invisible */
+    visibility: hidden;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+.pergamino-container.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Estilos para el contenido del pergamino (la carta en sí) */
+.pergamino-content {
+    background-color: #f7e7c6; /* Color crema/pergamino */
+    border: 5px solid #a0522d; /* Borde tipo madera o cuero */
+    border-radius: 10px;
+    padding: 40px;
+    margin: 20px;
+    max-width: 700px;
+    min-height: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    font-family: 'Georgia', serif; /* Fuente elegante para la carta final */
+    color: #4a382c;
+    text-align: left;
+    line-height: 1.8;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.pergamino-content h2 {
+    font-size: 2.2em;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #7b3f00;
+}
+
+/* Estilos para el párrafo final de la carta */
+#finalLetterContent {
+    min-height: 200px; /* Espacio para el texto */
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    opacity: 0; /* Inicialmente oculto */
+    transition: opacity 1.5s ease 1s; /* Aparece después de un retraso */
+}
+
+.pergamino-container.visible #finalLetterContent {
+    opacity: 1; /* Se revela cuando el pergamino es visible */
+}
+
+.pergamino-content .firma {
+    text-align: right;
+    margin-top: 40px;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 1.3em;
+    color: #7b3f00;
+    opacity: 0; /* Inicialmente ocultas */
+    transition: opacity 1.5s ease 1.5s; /* Aparecen después del texto */
+}
+
+.pergamino-container.visible .firma {
+    opacity: 1; /* Se revelan cuando el pergamino es visible */
+}
